@@ -1,9 +1,9 @@
 function image_5d = loadImg
 % N. Tallapragada -- June 2015
 % Code to convert a stack of confocal images of an organoid into a 5D array
-% Mmmm donuts
 
-%% Load data and function arguments
+%% Load data and functions
+addpath('bfmatlab');
 data = bfopen;
 imgData = data{1,1};
 
@@ -13,8 +13,8 @@ numImgs = length(imgData);
 numChan = str2num(imgData{1,2}(end));
 numSlices = numImgs/numChan;
 
+%% Build 5D array
 for chanNum = 1:numChan
-    %% Build 5D array
     z_slice = 1;
     for img = chanNum:numChan:numImgs
         image_5d(:,:,z_slice,chanNum,1) = double(imgData{img,1});
